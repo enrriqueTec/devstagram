@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,4 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('principal');
 });
+
+/*En esta parte importamos el controlador, definimos que es una clase y le pasamos el método*/
+Route::get('/crear-cuenta',[RegisterController::class,'index']);
 
