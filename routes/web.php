@@ -19,5 +19,7 @@ Route::get('/', function () {
 });
 
 /*En esta parte importamos el controlador, definimos que es una clase y le pasamos el método*/
-Route::get('/crear-cuenta',[RegisterController::class,'index']);
+//le asignamos un nombre a la ruta y laravel sabrá a que vista llamar
+Route::get('/register',[RegisterController::class,'index'])->name('register');
+Route::post('/register',[RegisterController::class,'store']);
 
