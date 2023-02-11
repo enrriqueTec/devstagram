@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\logoutController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -28,4 +29,10 @@ Route::post('/register',[RegisterController::class,'store']);
 Route::get('/login',[LoginController::class,'index'])->name('login');
 Route::post('/login',[LoginController::class,'store']);
 
-Route::get('/muro',[PostController::class,'index'])->name('posts.index');
+Route::post('/logout',[logoutController::class,'store'])->name('logout');
+
+//Para crear una ruta en variable, se agrega {{}}
+/*Esto lo vamos a utilizar para mandar el nombre del usuario a la URL
+y como en el proyecto ya tenemos un modelo llamado user, es por eso que se
+puede utilizar*/
+Route::get('/{user:username}',[PostController::class,'index'])->name('posts.index');

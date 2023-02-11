@@ -16,10 +16,36 @@
         <div class="container mx-auto flex justify-between items-center">
         <h1 class="3xl font-black">DevStagram</h1>
 
-        <nav class="flex gap-2 items-center">
+        <!-- Comprobar si el usuario está autenticado con el Auth.
+        -Si está autenticado, mostramos el nombre del usuario
+        -Se crea el hipervinculo para terminar la sesión
+        -Se elimina el navbar con registrarse y crear cuenta, se cambia por el nombre del usuario y cerrar sesión
+        -->
+          @auth
+          <nav class="flex gap-2 items-center">
+            <a class="font-bold  text-gray-600 text-sm pl-5" href="#">
+              Hola: <span class="font-normal">{{auth()->user()->username}}</span>
+            </a>
+             
+            <form action="{{route('logout')}}" method="POST">
+              @csrf
+            <button type="submit" class="font-bold uppercase text-gray-600 text-sm pl-5" href="{{route('logout')}}">Cerrar sesión</button>
+            </form>
+
+        </nav>
+
+       
+          @endauth
+        <!-- Si el usuario no está autenticado, mostramos el navbar de registrarse y crear cuenta
+              - Todo esto con las directivas de laravel 
+        -->
+          @guest
+          <nav class="flex gap-2 items-center">
             <a class="font-bold uppercase text-gray-600 text-sm pl-5" href="{{route('login')}}">Login</a>
             <a class="font-bold uppercase text-gray-600 text-sm pl-5" href="{{route('register')}}">Crear cuenta</a>
         </nav>
+          @endguest
+         
         </div>
 
       </header>
@@ -31,10 +57,14 @@
         </h2>
         @yield('contenido')
 
-
-        <footer class="mt-10 text-center p-5 text-gray-500 font-bold uppercase">
+        
+        
+        @guest
+          <footer class="mt-10 text-center p-5 text-gray-500 font-bold uppercase">
           DevStagram - Todos los derechos reservados {{now()->year}} 
         </footer>
+        @endguest
+        
       </main>
     </body>
 

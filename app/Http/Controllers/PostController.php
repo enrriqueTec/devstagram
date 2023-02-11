@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -12,8 +13,10 @@ class PostController extends Controller
     {
         $this->middleware('auth');//Antes de redireccionar al index, verificamos si el usuario  está autenticado
     }
-    public function index()
+    public function index(User $user)
     {
-       return view('dashboard');
+        //De esta manera podemos enviar información de un modelo a la vista
+       return view('dashboard',
+       ['user'=>$user]);
     }
 }
