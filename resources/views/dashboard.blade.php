@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('titulo')
-    Tu cuenta
+    Perfil: {{$user->username}}
 @endsection
 
 @section('contenido')

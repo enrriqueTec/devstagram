@@ -36,3 +36,4 @@ Route::post('/logout',[logoutController::class,'store'])->name('logout');
 y como en el proyecto ya tenemos un modelo llamado user, es por eso que se
 puede utilizar*/
 Route::get('/{user:username}',[PostController::class,'index'])->name('posts.index');
+Route::get('/posts/create',[PostController::class,'create'])->name('posts.create');
