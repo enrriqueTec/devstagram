@@ -22,6 +22,19 @@ class PostController extends Controller
 
     public function create()
     {
+        //create permite visualizar un formulario o página 
         return view('posts.create');
+    }
+
+    public function store(Request $request)
+    {
+        //Store siempre recibe la variable Request
+        //store permite almacenar en la base de datos
+
+        $this->validate($request,[
+            'titulo'=>'required|max:255',
+            'descripcion'=>'required',
+            'imagen'=>'required'
+        ]);
     }
 }
