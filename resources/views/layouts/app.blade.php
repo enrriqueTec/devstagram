@@ -3,9 +3,11 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        @stack('styles')
         <title>DevStagram - @yield('titulo')</title>
+        
         @vite('resources/css/app.css')
+        @vite('resources/js/app.js')
 
         
     </head>
@@ -32,7 +34,7 @@
             
             Crear</a>
             
-            <a class="font-bold  text-gray-600 text-sm pl-5" href="#">
+            <a class="font-bold  text-gray-600 text-sm pl-5" href="{{route('posts.index',auth()->user()->username)}}">
               Hola: <span class="font-normal">{{auth()->user()->username}}</span>
             </a>
              

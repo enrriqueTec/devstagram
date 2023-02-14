@@ -6,11 +6,17 @@
     
 @endsection
 
+<!-- De esta manera, se cargan las hojas de estilo solo en la página que deseamos utilizarlas y no en todo el proyecto-->
+@push('styles')
+
+<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+@endpush
+
 @section('contenido')
     <div class="md:flex md:items-center ">
 
         <div class="md:w-1/2 px-10 ">
-            imagen aquí
+            <form action="{{route('imagenes.store')}}" method="POST" enctype="multipart/form-data" id="dropzone" class="dropzone border-dashed border-2 w-full h-96 rounded flex flex-col justify-center items-center" >@csrf </form>
         </div>
 
         <div class="md:w-1/2 p-10  bg-white rounded-lg shadow-xl mt-10 md:mt-0">
@@ -50,8 +56,7 @@
                         
                     @enderror"
     
-                    
-                    > {{old('descripcion')}}</textarea>
+                     > {{old('descripcion')}}</textarea>
                     @error('descripcion')
                         <p class="bg-red-500 text-white my-2 rounded-xl text-sm p-2 text-center">{{$message}}</p>
         
