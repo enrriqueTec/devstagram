@@ -12,7 +12,7 @@ class PostController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');//Antes de redireccionar al index, verificamos si el usuario  está autenticado
+        $this->middleware('auth')->except(['show','index']);//Antes de redireccionar al index, verificamos si el usuario  está autenticado
     }
     public function index(User $user)
     {
@@ -65,5 +65,13 @@ class PostController extends Controller
 
 
         return redirect()->route('posts.index', auth()->user()->username);
+    }
+
+
+    public function show (User $user, Post $post){
+
+
+        return view('posts.show', [
+            'post'=>$post]);
     }
 }

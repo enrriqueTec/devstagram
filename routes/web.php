@@ -37,8 +37,13 @@ Route::post('/logout',[logoutController::class,'store'])->name('logout');
 y como en el proyecto ya tenemos un modelo llamado user, es por eso que se
 puede utilizar*/
 Route::get('/{user:username}',[PostController::class,'index'])->name('posts.index');
-Route::get('/posts/create',[PostController::class,'create'])->name('posts.create');
 
-Route::post('/posts',[PostController::class,'store'])->name('posts.store');
+
+Route::get('/posts/create',[PostController::class,'create'])->name('posts.create');//ruta para crear un post
+Route::post('/posts',[PostController::class,'store'])->name('posts.store');//ruta para almacenar posts
+Route::get('/{user:username}/posts/{post}',[PostController::class,'show'])->name('posts.show');//ruta para mostrar detalles de los posts publicados
+
 
 Route::post('/imagenes', [ImagenController::class, 'store'])->name('imagenes.store');
+
+
