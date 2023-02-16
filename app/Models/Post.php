@@ -18,4 +18,13 @@ class Post extends Model
         'imagen',
         'user_id'
     ];
+
+    /**Un usuario puede crear muchos posts pero un posts solo puede tener un autor
+     * esa relación se define con el belongsTo
+     */
+
+    public function user()
+    {
+        return $this->belongsTo(User::class)->select(['name','username']);
+    }
 }

@@ -42,4 +42,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**Las relaciones a los modelos en laravel se asignan de la siguiente manera: 
+     * aquí le vamos a asignar la relación de un usuario puede tener muchos posts 
+     * por eso se utiliza el hasMany y el modelo referenciado
+    */
+
+    public function posts(){
+        return $this->hasMany(Post::class);
+    }
 }

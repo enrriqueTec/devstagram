@@ -16,9 +16,14 @@ class PostController extends Controller
     }
     public function index(User $user)
     {
-        //De esta manera podemos enviar información de un modelo a la vista
+        //filtramos la información de posts desde la BD
+        $posts = Post::where('user_id', $user->id)->paginate(20);
+
+        
+        //De esta manera podemos enviar información de un modelo a la vista, en este caso le mandamos el usuario y los posts que ha publicado
        return view('dashboard',
-       ['user'=>$user]);
+       ['user'=>$user,
+        'posts'=>$posts]);
     }
 
     public function create()
@@ -38,12 +43,26 @@ class PostController extends Controller
             'imagen'=>'required'
         ]);
 
-        Post::create([
+        //Forma uno de dar de alta posts y cualquier otro dato 
+        //Post::create([
+        //'titulo' => $request->titulo,
+        //'descripcion' => $request->descripcion,
+        //'imagen' => $request->imagen,
+        //'user_id' => auth()->user()->id //User id es llave foranea, pero lo tomamos de auth por que el usuario está autenticado
+        //]); 
+
+        //Otras formas de dar de alta posts, esta forma es más a la convencion de Laravel
+        /**Aquí accedemos directamente a las relaciones creadas en el modelo usuario y posts
+         * y con ello damos de alta
+         */
+
+        $request->user()->posts()->create([
         'titulo' => $request->titulo,
         'descripcion' => $request->descripcion,
         'imagen' => $request->imagen,
-        'user_id' => auth()->user()->id //User id es llave foranea, pero lo tomamos de auth por que el usuario está autenticado
+        'user_id' => auth()->user()->id
         ]);
+
 
         return redirect()->route('posts.index', auth()->user()->username);
     }
