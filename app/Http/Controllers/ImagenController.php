@@ -16,15 +16,16 @@ class ImagenController extends Controller
         //$input = $request->all();
 
         $imagen = $request->file('file');
+
         $nombreImagen = Str::uuid() . "." . $imagen->extension(); //Se le asigna un ID unico a las imágenes
          
        $imagenServidor = Image::make($imagen);
 
        $imagenServidor->fit(1000, 1000);//escalamos la img a 1000 x 1000 px
 
-       $imagenPath= public_path('uploads') . '/' . $nombreImagen;
+       $imagenPath = public_path('uploads') . '/' . $nombreImagen;
         $imagenServidor->save($imagenPath);
 
-        return response()->json(['imagen',$nombreImagen]);
+        return response()->json(['imagen' => $nombreImagen]);
     }
 }
