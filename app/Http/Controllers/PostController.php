@@ -12,11 +12,13 @@ class PostController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except(['show','index']);//Antes de redireccionar al index, verificamos si el usuario  está autenticado
+        //Antes de redireccionar al index, verificamos si el usuario  está autenticado
+        //con el except sirve para limitar algunas vistas para usuarios no autenticados
+        $this->middleware('auth')->except(['show','index']);
     }
     public function index(User $user)
     {
-        //filtramos la información de posts desde la BD
+        //filtramos la información de posts desde la BD y paginamos los primeros 20 resultados 
         $posts = Post::where('user_id', $user->id)->paginate(20);
 
         
@@ -72,6 +74,8 @@ class PostController extends Controller
 
 
         return view('posts.show', [
-            'post'=>$post]);
+            'post'=>$post,
+            'user'=>$user
+        ]);
     }
 }
