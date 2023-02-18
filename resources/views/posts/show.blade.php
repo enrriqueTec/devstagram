@@ -21,6 +21,23 @@
             <p class="text-sm text-gray-500">{{$post->created_at->diffForHumans()}}</p>
             <p class="mt-5">{{$post->descripcion}}</p>
         </div>
+        
+        @auth
+           
+       @if ($post->user_id===auth()->user()->id)
+           
+      
+        <form action="{{route('post.destroy',$post)}}" method="POST" >
+            @method('DELETE')
+            @csrf
+            <input 
+            type="submit" 
+            value="Eliminar publicación"
+            class="bg-red-500 hover:bg-red-600 p-2 rounded text-white font-bold mt-4 cursor-pointer">
+        </form>
+        
+        @endif 
+         @endauth
     </div>
 
     <div class="md:w-1/2 p-5">
@@ -52,9 +69,7 @@
                     placeholder="Agrega un comentario"
                     class="border p-3 w-full rounded @error('comentario') border-red-500
                         
-                    @enderror">
-                    
-                    </textarea>
+                    @enderror"></textarea>
 
                     @error('comentario')
                         <p class="bg-red-500 text-white my-2 rounded-xl text-sm p-2 text-center">{{$message}}</p>
@@ -75,7 +90,7 @@
                         <div class="p-5 border-gray-300 border-b">
 
                             <a href="{{route('posts.index', $comentario->user)}}" class="font-bold">
-                                {{$comentario->user->usename}}
+                                {{$comentario->user->username}}
                             </a>
 
                             <p>{{$comentario->comentario}}</p>

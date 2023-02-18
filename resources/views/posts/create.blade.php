@@ -56,7 +56,7 @@
                         
                     @enderror"
     
-                     > {{old('descripcion')}}</textarea>
+                     >{{old('descripcion')}}</textarea>
                     @error('descripcion')
                         <p class="bg-red-500 text-white my-2 rounded-xl text-sm p-2 text-center">{{$message}}</p>
         

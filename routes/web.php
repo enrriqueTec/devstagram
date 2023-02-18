@@ -43,8 +43,10 @@ Route::get('/{user:username}',[PostController::class,'index'])->name('posts.inde
 Route::get('/posts/create',[PostController::class,'create'])->name('posts.create');//ruta para crear un post
 Route::post('/posts',[PostController::class,'store'])->name('posts.store');//ruta para almacenar posts
 Route::get('/{user:username}/posts/{post}',[PostController::class,'show'])->name('posts.show');//ruta para mostrar detalles de los posts publicados
+Route::delete('posts/{post}',[PostController::class,'destroy'])->name('post.destroy');
 
-Route::post('/{user:username}/posts/{post}',[ComentarioController::class,'store'])->name('comentarios.store');//ruta para mostrar detalles de los posts publicados
+Route::post('/{user:username}/posts/{post}',[ComentarioController::class,'store'])->name('comentarios.store');//ruta para almacenar los comentarios publicados
+
 
 Route::post('/imagenes', [ImagenController::class, 'store'])->name('imagenes.store');
 
