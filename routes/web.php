@@ -5,6 +5,7 @@ use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\logoutController;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('principal');
 });
+
+//rutas para el perfil
+Route::get('/editar-perfil',[PerfilController::class,'index'])->name('perfil.index');
+Route::post('/editar-perfil',[PerfilController::class,'store'])->name('perfil.store');
 
 /*En esta parte importamos el controlador, definimos que es una clase y le pasamos el método*/
 //le asignamos un nombre a la ruta y laravel sabrá a que vista llamar
@@ -53,3 +58,8 @@ Route::post('/imagenes', [ImagenController::class, 'store'])->name('imagenes.sto
 
 //like a las fotos
 Route::post('/posts/{post}/likes',[LikeController::class,'store'])->name('posts.like.store');
+
+//dislike a las fotos
+Route::delete('/posts/{post}/likes',[LikeController::class,'destroy'])->name('posts.like.destroy');
+
+

@@ -38,4 +38,11 @@ class Post extends Model
     {
         return $this->hasMany(Like::class);
     }
+
+    public function checkLike(User $user)
+    {
+        //Revisamos si el usuario ya le dió like a la publicación para evitar tener información repetida
+        return $this->likes->contains('user_id', $user->id);
+
+    }
 }

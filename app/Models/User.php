@@ -48,7 +48,13 @@ class User extends Authenticatable
      * por eso se utiliza el hasMany y el modelo referenciado
     */
 
-    public function posts(){
+    public function posts()
+    {
         return $this->hasMany(Post::class);
+    }
+
+    public function like()
+    {
+        return $this->hasMany(Like::class);
     }
 }

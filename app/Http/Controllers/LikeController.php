@@ -15,4 +15,12 @@ class LikeController extends Controller
 
       return back();
     }
+
+    public function destroy(Request $request, Post $post)
+    {
+      $request->user()->like()->where('post_id',$post->id)->delete();
+      
+      return back();
+    
+    }
 }
