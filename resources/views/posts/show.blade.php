@@ -47,19 +47,17 @@
            
             
             @endauth
-             <p class="font-bold">{{$post->likes->count()}} <span class="font-normal"> likes</span></p>
+             <p class="font-bold">{{$post->likes->count()}} <span class=""> likes</span></p>
             </div>
-        </div>
-      
-           <!-- Se puede acceder directo al usuario con la variable de post
+
+            <!-- Se puede acceder directo al usuario con la variable de post
            Gracias a las relaciones que previamente se definieron (hasMany, belongto,etc)
            Por eso es recomendable seguir las convenciones de laravel (nombres en inglés)-->
             <p class="font-bold"> {{$post->user->username}}</p>
             <p class="text-sm text-gray-500">{{$post->created_at->diffForHumans()}}</p>
             <p class="mt-5">{{$post->descripcion}}</p>
-        </div>
-        
-        @auth
+
+            @auth
            
        @if ($post->user_id===auth()->user()->id)
            
@@ -75,8 +73,16 @@
         
         @endif 
          @endauth
+
     </div>
 
+
+        
+      
+           
+        
+        
+        
     <div class="md:w-1/2 p-5">
         <div class="shodow bg-white p-5 mb-5">
 
@@ -139,7 +145,6 @@
                 @endif
             </div>
         </div>
-
 
     </div>
 </div>
