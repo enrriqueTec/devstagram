@@ -1,14 +1,16 @@
 <?php
 
-use App\Http\Controllers\ComentarioController;
-use App\Http\Controllers\ImagenController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\logoutController;
 use App\Http\Controllers\PerfilController;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\RegisterController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +23,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('principal');
-});
+//Aquí cambia un poco la nomenclatura debido a que el controlador solo tiene un método que es el invoke
+Route::get('/', HomeController::class)->name('home');
 
 //rutas para el perfil
 Route::get('/editar-perfil',[PerfilController::class,'index'])->name('perfil.index');
@@ -43,6 +44,12 @@ Route::post('/logout',[logoutController::class,'store'])->name('logout');
 /*Esto lo vamos a utilizar para mandar el nombre del usuario a la URL
 y como en el proyecto ya tenemos un modelo llamado user, es por eso que se
 puede utilizar*/
+
+//siguiendo usuarios
+
+Route::post('/{user:username}/follow',[FollowerController::class,'store'])->name('users.follow');
+Route::delete('/{user:username}/unfollow',[FollowerController::class,'destroy'])->name('users.unfollow');
+
 Route::get('/{user:username}',[PostController::class,'index'])->name('posts.index');
 
 
@@ -52,6 +59,7 @@ Route::get('/{user:username}/posts/{post}',[PostController::class,'show'])->name
 Route::delete('posts/{post}',[PostController::class,'destroy'])->name('post.destroy');
 
 Route::post('/{user:username}/posts/{post}',[ComentarioController::class,'store'])->name('comentarios.store');//ruta para almacenar los comentarios publicados
+
 
 
 Route::post('/imagenes', [ImagenController::class, 'store'])->name('imagenes.store');
