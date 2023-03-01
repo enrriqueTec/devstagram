@@ -9,7 +9,7 @@
         @vite('resources/css/app.css')
         @vite('resources/js/app.js')
 
-        
+        @livewireStyles <!-- Agregando los estilos de livewire-->
     </head>
     <body class="bg-gray-100">
     
@@ -77,6 +77,8 @@
         @endguest
         
       </main>
+
+      @livewireScripts  <!-- Agregando los scripts de livewire-->
     </body>
 
 </html>
