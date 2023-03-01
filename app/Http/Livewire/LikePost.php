@@ -35,7 +35,7 @@ class LikePost extends Component
             $this->likes ++;
         }
 
-        return "desde la fn de like";
+        
 
     }
     public function render()
