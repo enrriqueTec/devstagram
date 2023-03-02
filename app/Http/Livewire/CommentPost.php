@@ -9,10 +9,12 @@ class CommentPost extends Component
 {
     public $post;
     public $comentario;
+    
 
     protected $rules=[
         'comentario'=>'required|max:255'
     ];
+    protected $listeners = ['refreshComponent' => '$refresh'];
 
     public function mount($post)
     {
@@ -30,7 +32,12 @@ class CommentPost extends Component
             'comentario'=>$this->comentario
         ]);
 
-        $comentario="";
+
+      
+        
+
+       $this->emit('refreshComponent');
+       $this->dispatchBrowserEvent('contentChanged');
     }
     
     public function render()
